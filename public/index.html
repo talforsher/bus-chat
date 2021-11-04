@@ -46,7 +46,7 @@
       function onScanSuccess(decodedText, decodedResult) {
         console.log(`Code matched = ${decodedText}`, decodedResult);
         document.querySelector("#room").value = decodedText;
-        if (document.querySelector("#userName").value !== "")
+        if (document.querySelector("#userName").value === "")
           document.querySelector("#userName").value = `user${Math.round(
             Math.random() * 100
           )}`;
