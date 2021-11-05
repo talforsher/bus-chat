@@ -48,6 +48,7 @@
       const form = document.querySelector("#form");
 
       const qrScanner = new QrScanner(qr, (result) => {
+        qrScanner.stop();
         room.value = result;
         if (userName.value === "") {
           const localUser = localStorage.getItem("user");
