@@ -63,11 +63,11 @@
           //   } else localStorage.setItem("user", userName.value);
           //   form.submit();
         },
-        (error) => console.log(error),
-        (e) => {
-          e.width = 300;
-          return e;
-        }
+        (error) => console.log(error)
+        // (e) => {
+        //   e.width = 300;
+        //   return e;
+        // }
       );
       qrScanner.start();
     </script>
