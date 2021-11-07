@@ -35,7 +35,7 @@
           </div>
         </form>
       </main>
-      <video style="width: -webkit-fill-available" id="qr"></video>
+      <video id="qr"></video>
     </div>
     <script src="js/scanner.js" type="text/javascript"></script>
     <script>
@@ -47,7 +47,6 @@
       const qrScanner = new QrScanner(
         qr,
         (result) => {
-          console.log(result);
           qrScanner.stop();
           room.value = result;
           if (userName.value === "") {
@@ -64,7 +63,11 @@
           //   } else localStorage.setItem("user", userName.value);
           //   form.submit();
         },
-        (error) => console.log(error)
+        (error) => console.log(error),
+        (e) => {
+          e.width = 300;
+          return e;
+        }
       );
       qrScanner.start();
     </script>
