@@ -47,19 +47,24 @@
       const room = document.querySelector("#room");
       const form = document.querySelector("#form");
 
-      const qrScanner = new QrScanner(qr, (result) => {
-        qrScanner.stop();
-        room.value = result;
-        if (userName.value === "") {
-          const localUser = localStorage.getItem("user");
-          if (localUser) userName.value = localUser;
-          else
-            userName.value = encodeURI(
-              `נוסע מספר ${Math.round(Math.random() * 100)}`
-            );
-        } else localStorage.setItem("user", userName.value);
-        form.submit();
-      });
+      const qrScanner = new QrScanner(
+        qr,
+        (result) => {
+          console.log(result);
+          qrScanner.stop();
+          room.value = result;
+          if (userName.value === "") {
+            const localUser = localStorage.getItem("user");
+            if (localUser) userName.value = localUser;
+            else
+              userName.value = encodeURI(
+                `נוסע מספר ${Math.round(Math.random() * 100)}`
+              );
+          } else localStorage.setItem("user", userName.value);
+          form.submit();
+        },
+        (error) => console.log(error)
+      );
       qrScanner.start();
     </script>
   </body>
