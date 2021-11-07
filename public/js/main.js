@@ -88,3 +88,5 @@ function outputUsers(users) {
 document.getElementById("leave-btn").addEventListener("click", () => {
   window.location = "../index.html";
 });
+
+
