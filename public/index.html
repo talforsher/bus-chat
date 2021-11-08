@@ -12,8 +12,52 @@
     />
     <link rel="stylesheet" href="css/style.css" />
     <title>שיחת אוטובוס</title>
+    <style>
+      .wrapper {
+        padding: 0 4rem;
+      }
+      #canvas {
+        position: absolute;
+      }
+      #scanned {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      #video-wrapper {
+        height: 480px;
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+    </style>
   </head>
   <body>
+    <template id="scaned-item">
+      <style>
+        .wrapper {
+          --gradient-start: #c471ed;
+          --gradient-end: #f7797d;
+          border: none;
+          border-radius: 1rem;
+          padding: 1rem;
+          background: linear-gradient(
+            var(--gradient-start),
+            var(--gradient-end)
+          );
+          box-shadow: 0 3px -3px 10px #000;
+        }
+        .wrapper span {
+          font-family: Arial, Helvetica, sans-serif;
+          color: white;
+          display: block;
+        }
+      </style>
+      <div class="wrapper">
+        <span>Value: <slot name="raw"></slot></span>
+        <span>Format: <slot name="format"></slot></span>
+      </div>
+    </template>
     <div class="join-container">
       <header class="join-header">
         <h1><i class="fas fa-smile"></i> שיחת אוטובוס</h1>
@@ -35,7 +79,19 @@
           </div>
         </form>
       </main>
-      <video id="qr"></video>
+      <div class="wrapper">
+        <h1>QR Code Scanner</h1>
+        <div style="display: flex; gap: 1rem">
+          <div id="video-wrapper">
+            <canvas id="canvas" width="640" height="480"></canvas>
+            <video id="video" width="640" height="480" autoplay></video>
+          </div>
+          <div>
+            <h1>Recently Scanned</h1>
+            <div id="scanned"></div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="js/scanner.js" type="text/javascript"></script>
     <script>
