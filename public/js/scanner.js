@@ -40,7 +40,9 @@ const video = document.getElementById("video");
 // Check for a camera
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
   const constraints = {
-    video: true,
+    video: {
+      facingMode: "environment",
+    },
     audio: false,
   };
 
