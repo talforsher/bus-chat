@@ -18,7 +18,8 @@ body {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   background: var(--light-color);
-  margin: 20px;
+
+  width: fit-content;
 }
 
 ul {
@@ -129,7 +130,8 @@ a {
 
 /* Join Page */
 .join-container {
-  /* max-width: 300px; */
+  width: fit-content;
+
   color: #fff;
 }
 

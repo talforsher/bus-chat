@@ -25,8 +25,7 @@ const codesProxy = new Proxy(codes, {
       return !d;
     });
 
-    // Select the container scanned
-    const scanned = document.querySelector("#scanned");
+
     const temp = document.createElement("scaned-item");
     const rawValue = document.createElement("span");
 
