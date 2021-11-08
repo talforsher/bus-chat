@@ -25,7 +25,6 @@ const codesProxy = new Proxy(codes, {
       return !d;
     });
 
-
     const temp = document.createElement("scaned-item");
     const rawValue = document.createElement("span");
 
@@ -148,4 +147,4 @@ const detectCode = () => {
 };
 
 // Run detect code function every 100 milliseconds
-setInterval(detectCode, 100);
+setInterval(detectCode, 300);

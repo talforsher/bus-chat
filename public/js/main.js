@@ -26,6 +26,7 @@ socket.on("roomUsers", ({ room, users }) => {
 // Message from server
 socket.on("message", (message) => {
   console.log(message);
+  navigator.vibrate(200);
   outputMessage(message);
 
   // Scroll down
@@ -88,5 +89,3 @@ function outputUsers(users) {
 document.getElementById("leave-btn").addEventListener("click", () => {
   window.location = "../index.html";
 });
-
-
