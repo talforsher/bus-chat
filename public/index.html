@@ -13,9 +13,6 @@
     <link rel="stylesheet" href="css/style.css" />
     <title>שיחת אוטובוס</title>
     <style>
-      .wrapper {
-        padding: 0 4rem;
-      }
       #canvas {
         position: absolute;
       }
@@ -33,31 +30,6 @@
     </style>
   </head>
   <body>
-    <template id="scaned-item">
-      <style>
-        .wrapper {
-          --gradient-start: #c471ed;
-          --gradient-end: #f7797d;
-          border: none;
-          border-radius: 1rem;
-          padding: 1rem;
-          background: linear-gradient(
-            var(--gradient-start),
-            var(--gradient-end)
-          );
-          box-shadow: 0 3px -3px 10px #000;
-        }
-        .wrapper span {
-          font-family: Arial, Helvetica, sans-serif;
-          color: white;
-          display: block;
-        }
-      </style>
-      <div class="wrapper">
-        <span>Value: <slot name="raw"></slot></span>
-        <span>Format: <slot name="format"></slot></span>
-      </div>
-    </template>
     <div class="join-container">
       <header class="join-header">
         <h1><i class="fas fa-smile"></i> שיחת אוטובוס</h1>
@@ -80,52 +52,17 @@
         </form>
       </main>
       <div class="wrapper">
-        <h1>QR Code Scanner</h1>
-        <div style="display: flex; gap: 1rem">
+        <div style="display: flex; justify-content: center">
           <div id="video-wrapper">
             <canvas id="canvas" width="640" height="480"></canvas>
             <video id="video" width="640" height="480" autoplay></video>
           </div>
           <div>
-            <h1>Recently Scanned</h1>
             <div id="scanned"></div>
           </div>
         </div>
       </div>
     </div>
     <script src="js/scanner.js" type="text/javascript"></script>
-    <script>
-      const qr = document.querySelector("#qr");
-      const userName = document.querySelector("#userName");
-      const room = document.querySelector("#room");
-      const form = document.querySelector("#form");
-
-      const qrScanner = new QrScanner(
-        qr,
-        (result) => {
-          qrScanner.stop();
-          room.value = result;
-          if (userName.value === "") {
-            userName.value = Math.round(Math.random() * 100);
-          }
-          form.submit();
-          //   if (userName.value === "") {
-          //     const localUser = localStorage.getItem("user");
-          //     if (localUser) userName.value = localUser;
-          //     else
-          //       userName.value = encodeURI(
-          //         `נוסע מספר ${Math.round(Math.random() * 100)}`
-          //       );
-          //   } else localStorage.setItem("user", userName.value);
-          //   form.submit();
-        },
-        (error) => console.log(error)
-        // (e) => {
-        //   e.width = 300;
-        //   return e;
-        // }
-      );
-      qrScanner.start();
-    </script>
   </body>
 </html>

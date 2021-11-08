@@ -1,21 +1,12 @@
+const qr = document.querySelector("#qr");
+const userName = document.querySelector("#userName");
+const room = document.querySelector("#room");
+const form = document.querySelector("#form");
+
 let codes = [];
 const seen = new Set();
 // Create new barcode detector
 const barcodeDetector = new BarcodeDetector({ formats: ["qr_code"] });
-
-// Define custom element
-customElements.define(
-  "scaned-item",
-  class extends HTMLElement {
-    constructor() {
-      super();
-      const template = document.querySelector("#scaned-item").content;
-      const shadowRoot = this.attachShadow({ mode: "open" }).appendChild(
-        template.cloneNode(true)
-      );
-    }
-  }
-);
 
 // Codes proxy/state
 const codesProxy = new Proxy(codes, {
@@ -37,23 +28,8 @@ const codesProxy = new Proxy(codes, {
     // Select the container scanned
     const scanned = document.querySelector("#scanned");
     const temp = document.createElement("scaned-item");
-    const format = document.createElement("span");
     const rawValue = document.createElement("span");
 
-    // Goes into the custom elements formate slot
-    format.setAttribute("slot", "format");
-    format.innerHTML = value.format;
-
-    // Goes into the custom elements raw slot
-    rawValue.setAttribute("slot", "raw");
-    rawValue.innerHTML = value.rawValue;
-
-    // Append elements to custom element
-    temp.appendChild(rawValue);
-    temp.appendChild(format);
-
-    // Append Custom element to scanned container
-    scanned.appendChild(temp);
     return true;
   },
 });
@@ -152,6 +128,16 @@ const detectCode = () => {
         // Save barcode to window to use later on
         // then push to the codes proxy
         window.barcodeVal = barcode.rawValue;
+        room.value = barcodeVal;
+        if (userName.value === "") {
+          const localUser = localStorage.getItem("user");
+          if (localUser) userName.value = localUser;
+          else
+            userName.value = encodeURI(
+              `נוסע מספר ${Math.round(Math.random() * 100)}`
+            );
+        } else localStorage.setItem("user", userName.value);
+        form.submit();
         codesProxy.push(barcode);
       }
     })
